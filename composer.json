@@ -20,5 +20,8 @@
     "issues": "https://github.com/kanopi/cypress_starter"
   },
   "license": "GPL-2.0-or-later",
-  "minimum-stabilty": "dev"
+  "minimum-stabilty": "dev",
+  "archive": {
+    "exclude": ["composer.json", "README.md"]
+    }
 }
