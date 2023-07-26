@@ -21,7 +21,7 @@ A set of default tests to get you jumpstarted configuring Cypress for Drupal.
 
 ## Installation
 
-## Updated Composer Installers.
+### Install/update composer installers.
 
 For Composer to understand your new `cypress-test` `install-type`, you need to require the Composer Installer Extender package.
 
