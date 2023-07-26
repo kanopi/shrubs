@@ -1,8 +1,8 @@
 {
-  "name": "drupal/cypress_starter",
+  "name": "kanopi/cypress_starter",
   "description": " A set of default tests to get you jumpstarted configuring Cypress for Drupal.",
   "type": "cypress-tests",
-  "homepage": "https://www.drupal.org/project/cypress_starter",
+  "homepage": "https://github.com/kanopi/cypress_starter",
   "authors": [
     {
       "name": "Jim Birch",
@@ -11,13 +11,13 @@
     },
     {
       "name": "Paul Sheldrake",
-      "homepage": "https://www.drupal.org/u/thejimbirch",
+      "homepage": "https://www.drupal.org/u/paulsheldrake",
       "role": "Trouble maker"
     }
   ],
   "require": { },
   "support": {
-    "issues": "https://www.drupal.org/project/issues/cypress_starter"
+    "issues": "https://github.com/kanopi/cypress_starter"
   },
   "license": "GPL-2.0-or-later",
   "minimum-stabilty": "dev"
