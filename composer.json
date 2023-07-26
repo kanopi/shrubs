@@ -1,7 +1,7 @@
 {
   "name": "drupal/cypress_starter",
   "description": " A set of default tests to get you jumpstarted configuring Cypress for Drupal.",
-  "type": "cypress-tests",
+  "type": "cypress-test",
   "homepage": "https://www.drupal.org/project/cypress_starter",
   "authors": [
     {
