@@ -1,4 +1,4 @@
-# Cypress Starter
+# Shrubs
 
 ## Contents of this file
 
@@ -48,13 +48,13 @@ Add this repository to you composer.json repositories section.
 ```
 {
  "type": "vcs",
- "url": "https://github.com/kanopi/cypress_starter"
+ "url": "https://github.com/kanopi/shrubs"
 }
 ```
 
 ### Require the project
 
-`composer require kanopi/cypress_starter`
+`composer require kanopi/shrubs`
 
 ## Configuration
 
@@ -65,7 +65,7 @@ Add this repository to you composer.json repositories section.
 
 Current maintainers:
  * [thejimbirch](https://www.drupal.org/u/thejimbirch)
- * [albertski](https://www.drupal.org/u/albertski)
+ * [paulsheldrake](https://www.drupal.org/u/paulsheldrake)
 
 This project is sponsored by:
  * [Kanopi studios](https://www.drupal.org/kanopi-studios)

@@ -1,8 +1,8 @@
 {
-  "name": "kanopi/cypress_starter",
+  "name": "kanopi/shrubs",
   "description": " A set of default tests to get you jumpstarted configuring Cypress for Drupal.",
   "type": "cypress-test",
-  "homepage": "https://github.com/kanopi/cypress_starter",
+  "homepage": "https://github.com/kanopi/shrubs",
   "authors": [
     {
       "name": "Jim Birch",
@@ -17,7 +17,7 @@
   ],
   "require": { },
   "support": {
-    "issues": "https://github.com/kanopi/cypress_starter"
+    "issues": "https://github.com/kanopi/shrubs"
   },
   "license": "GPL-2.0-or-later",
   "minimum-stabilty": "dev",
