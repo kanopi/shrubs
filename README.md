@@ -32,11 +32,11 @@ This package lets you define new install-types for Composer so it understands wh
 Next, you need to add two entries in composer.json for an install-type and its path:
 
 ```
-"installer-types": ["cypress-test"],
+"installer-types": ["cypress-e2e"],
 "installer-paths": {
  // existing entries omitted...
  "tests/cypress/cypress/e2e/{$name}": [
-   "type:cypress-test"
+   "type:cypress-e2e"
  ]
 }
 ```
