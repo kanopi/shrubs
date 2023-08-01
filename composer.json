@@ -1,7 +1,7 @@
 {
   "name": "kanopi/shrubs",
   "description": " A set of default tests to get you jumpstarted configuring Cypress for Drupal.",
-  "type": "cypress-test",
+  "type": "cypress-e2e",
   "homepage": "https://github.com/kanopi/shrubs",
   "authors": [
     {
