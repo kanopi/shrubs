@@ -56,6 +56,15 @@ Add this repository to you composer.json repositories section.
 
 `composer require kanopi/shrubs`
 
+### Tell Cypress where to import the tests
+
+In the `tests/cypress/cypress/support` folder, edit `e2e.js` and add the following:
+
+```
+// Import commands.js using ES2015 syntax:
+import '../e2e/shrubs/commands'
+```
+
 ## Configuration
 
  * @TODO Document how to use these commands.
