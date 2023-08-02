@@ -20,8 +20,5 @@
     "issues": "https://github.com/kanopi/shrubs"
   },
   "license": "GPL-2.0-or-later",
-  "minimum-stabilty": "dev",
-  "archive": {
-    "exclude": ["composer.json", "README.md"]
-    }
+  "minimum-stabilty": "dev"
 }
