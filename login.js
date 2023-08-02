@@ -30,5 +30,5 @@ Cypress.Commands.add('login', (usernameParam = '', password = '') => {
 
     // Check user page loads.
     cy.get('.page-title').contains(username)
-    cy.get('.profile').contains('Member for')
+    cy.get('main').contains('Member for')
 })
