@@ -29,6 +29,6 @@ Cypress.Commands.add('login', (usernameParam = '', password = '') => {
     cy.wait(500) // Wait for the UI to catch up.
 
     // Check user page loads.
-    cy.get('.page-title').contains(username)
+    cy.get('main').contains(username)
     cy.get('main').contains('Member for')
 })
