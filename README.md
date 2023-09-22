@@ -87,11 +87,11 @@ cy.uploadFile('#file-field-wrapper', 'example.png');`
 Add two entries in composer.json for an install-type and its path:
 
 ```
-"installer-types": ["cypress-e2e"],
+"installer-types": ["cypress-support"],
 "installer-paths": {
  // existing entries omitted...
  "tests/cypress/cypress/support/{$name}": [
-   "type:cypress-e2e"
+   "type:cypress-support"
  ]
 }
 ```
