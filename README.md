@@ -1,17 +1,78 @@
-# Shrubs
+# Shrubs (Drupal Cypress Support Commands)
 
-## Contents of this file
+Common support commands for Cypress when interacting with Drupal.
 
- * Introduction
- * Requirements
- * Installation
- * Configuration
- * Maintainers
+## Available Commands
+
+### Drupal Cypress autocomplete
+Will select the first match from an autocomplete field.
+```
+cy.autocomplete('input[data-drupal-selector="edit-field-episode-show-0-target-id"]', 'Term Name')
+```
+
+### Drupal Cypress ckEditor get
+Gets the value of a ckeditor instance.
+```
+cy.ckeditorGet('#edit-body-wrapper').should('contain', 'hello world')
+```
+
+### Drupal Cypress ckEditor set
+Set the value of a ckeditor instance.
+```
+cy.ckeditorSet('#field_body-wrapper', 'hello world');
+```
+
+### Drupal Cypress drush
+Runs Drush commands in multiple environments
+
+Support running commands against Pantheon multidev environments as well.
+```
+cy.drush('status');
+```
+
+### Drupal Cypress login
+Sets a default login but also passing custom login details
+
+```
+cy.login();cy.login('user', 'password');
+```
+
+### Drupal Cypress logout
+Logs out of the current session
+```
+cy.logout();
+```
+
+### Drupal Cypress add item to media library
+Uploads a file to the media library and selects it in the field.
+
+Can optionally set the type of media uploaded if there is more than one type available.
+
+Files are expected to be in the `fixtures` folder.
+```
+cy.mediaLibraryAdd('#field_media_assets-media-library-wrapper', 'sample.png');
+cy.mediaLibraryAdd('#field_media_assets-media-library-wrapper', 'sample.mp3', 'audio');
+```
+
+### Drupal Cypress select item in media library
+Open a media browser modal and selects an existing media item
+
+Can optionally set the type of media uploaded if there is more than one type available.
+
+Files are expected to be in the `fixtures` folder.
+
+```
+cy.mediaLibrarySelect('#field_media_assets-media-library-wrapper', 'sample.png');
+cy.mediaLibrarySelect('#field_media_assets-media-library-wrapper', 'sample.png', 'image');
+```
 
 
-## Introductions
-
-A set of default tests to get you jumpstarted configuring Cypress for Drupal.
+### Drupal Cypress upload file
+Upload a file through a file field
+Files should be in the `fixtures` folder.
+```
+cy.uploadFile('#file-field-wrapper', 'example.png');`
+```
 
 ## Requirements
 
@@ -23,22 +84,13 @@ A set of default tests to get you jumpstarted configuring Cypress for Drupal.
 
 ### Install/update composer installers.
 
-For Composer to understand your new `cypress-test` `install-type`, you need to
-require the Composer Installer Extender package.
-
-`composer require oomphinc/composer-installers-extender:2.0.1`
-
-This package lets you define new install-types for Composer so it understands
-where to place them in the file system when it encounters them
-
-Next, you need to add two entries in composer.json for an install-type and its
-path:
+Add two entries in composer.json for an install-type and its path:
 
 ```
 "installer-types": ["cypress-e2e"],
 "installer-paths": {
  // existing entries omitted...
- "tests/cypress/cypress/e2e/{$name}": [
+ "tests/cypress/cypress/support/{$name}": [
    "type:cypress-e2e"
  ]
 }
@@ -61,15 +113,15 @@ Add this repository to you composer.json repositories section.
 
 ### Tell Cypress where to import the tests
 
-In the `tests/cypress/cypress/support` folder, edit `e2e.js` and add the
+In the `support` folder for where your Cypress tests are located, edit `commands.js` and add the
 following:
 
 ```
 // Import commands.js using ES2015 syntax:
-import '../e2e/shrubs/commands'
+import './shrubs/commands'
 ```
 
-### TO Ignore or not ignore, that is the....
+### To Ignore or not ignore, that is the....
 
 In you `.gitignore` file, add the following to ignore this repository as it is
 installed via composer.
@@ -80,10 +132,6 @@ However, I couldn't get the tests to install/run in CircleCI.  So I ended up
 not ignoring and committing these files.  This may not be a bad thing as the 
 next time we add or update commands, the developer on the project will have the
 option to update or not.
-
-## Configuration
-
- * @TODO Document how to use these commands.
 
 
 ## Maintainers
