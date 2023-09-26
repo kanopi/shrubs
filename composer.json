@@ -15,10 +15,18 @@
       "role": "Trouble maker"
     }
   ],
-  "require": { },
+  "require": {
+    "oomphinc/composer-installers-extender": "^2.0"
+  },
   "support": {
     "issues": "https://github.com/kanopi/shrubs"
   },
   "license": "GPL-2.0-or-later",
-  "minimum-stabilty": "dev"
+  "minimum-stabilty": "dev",
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true,
+      "oomphinc/composer-installers-extender": true
+    }
+  }
 }
