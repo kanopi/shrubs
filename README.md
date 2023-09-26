@@ -48,7 +48,8 @@ Uploads a file to the media library and selects it in the field.
 
 Can optionally set the type of media uploaded if there is more than one type available.
 
-Files are expected to be in the `fixtures` folder.
+Files are expected to be in the `fixtures` folder at the same level as `support` and
+`e2e`.  In most cases, that will be `/tests/cypress/cypress/fixtures`.
 ```
 cy.mediaLibraryAdd('#field_media_assets-media-library-wrapper', 'sample.png');
 cy.mediaLibraryAdd('#field_media_assets-media-library-wrapper', 'sample.mp3', 'audio');
