@@ -34,8 +34,11 @@ cy.drush('status');
 Sets a default login but also passing custom login details
 
 ```
-cy.login();cy.login('user', 'password');
+cy.login(); // login as a default user.   
+cy.login('user', 'password'); // as a specific user
 ```
+
+Assmuming there is some other process to create the user.
 
 ### Drupal Cypress logout
 Logs out of the current session
