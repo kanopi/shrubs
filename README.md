@@ -124,16 +124,18 @@ import './shrubs/commands'
 
 ### To Ignore or not ignore, that is the....
 
-In you `.gitignore` file, add the following to ignore this repository as it is
+In your `.gitignore` file, add the following to ignore this repository as it is
 installed via composer.
 
-`tests/cypress/cypress/e2e/shrubs`
+```
+tests/cypress/cypress/support/shrubs
+```
+or if you're ignoring at the cypress level
+```
+/cypress/support/shrubs
+```
 
-However, I couldn't get the tests to install/run in CircleCI.  So I ended up 
-not ignoring and committing these files.  This may not be a bad thing as the 
-next time we add or update commands, the developer on the project will have the
-option to update or not.
-
+If you run a test flow as part of a CI process, do a `composer install` to get the files from the package.
 
 ## Maintainers
 
