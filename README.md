@@ -100,21 +100,6 @@ Add two entries in composer.json for an install-type and its path:
 }
 ```
 
-### Add this repository.
-
-Add this repository to you composer.json repositories section.
-
-```
-{
- "type": "vcs",
- "url": "https://github.com/kanopi/shrubs"
-}
-```
-
-### Require the project
-
-`composer require kanopi/shrubs`
-
 ### Tell Cypress where to import the tests
 
 In the `support` folder for where your Cypress tests are located, edit `commands.js` and add the
