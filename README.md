@@ -3,18 +3,16 @@
 Common support commands for Cypress when interacting with Drupal.
 
 *Table of Contents*
-[Requirements](#requirements) 
-[Installation](#installation) 
-[Available Commands](#commands) 
-[Maintainers](#maintianers) 
+* [Requirements](#requirements) 
+* [Installation](#installation) 
+* [Available Commands](#available-commands) 
+* [Maintainers](#maintainers) 
 
-<a name="requirements"></a>
 ## Requirements
 
 * Cypress installed on your local or CI.
 * @TODO Document how we have Cypress set up.
 
-<a name="installation"></a>
 ## Installation
 
 ### Install/update composer installers.
@@ -52,7 +50,6 @@ Once you have completed the steps above, run the following command:
 ### Update your CI process to...
 @TODO (See what Paul did on Parks)
 
-<a name="commands"></a>
 ## Available Commands
 
 ### Drupal Cypress autocomplete
@@ -128,7 +125,6 @@ Files should be in the `fixtures` folder.
 cy.uploadFile('#file-field-wrapper', 'example.png');`
 ```
 
-<a name="maintainers"></a>
 ## Maintainers
 
 Current maintainers:
