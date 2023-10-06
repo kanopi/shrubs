@@ -2,6 +2,57 @@
 
 Common support commands for Cypress when interacting with Drupal.
 
+*Table of Contents*
+[Requirements](#requirements) 
+[Installation](#installation) 
+[Available Commands](#commands) 
+[Maintainers](#maintianers) 
+
+<a name="requirements"></a>
+## Requirements
+
+* Cypress installed on your local or CI.
+* @TODO Document how we have Cypress set up.
+
+<a name="installation"></a>
+## Installation
+
+### Install/update composer installers.
+
+Add two entries in composer.json for an install-type and its path:
+
+```
+"installer-types": ["cypress-support"],
+"installer-paths": {
+ // existing entries omitted...
+ "tests/cypress/cypress/support/{$name}": [
+   "type:cypress-support"
+ ]
+}
+```
+
+### Tell Cypress where to import the tests
+
+In the `support` folder for where your Cypress tests are located, edit `commands.js` and add the
+following:
+
+```
+// Import commands.js using ES2015 syntax:
+import './shrubs/commands'
+```
+
+### Requiring Shrubs using Composer
+
+The Shrubs repository is available via Packagist. 
+
+Once you have completed the steps above, run the following command:
+
+`composer require kanopi/shrubs`
+
+### Update your CI process to...
+@TODO (See what Paul did on Parks)
+
+<a name="commands"></a>
 ## Available Commands
 
 ### Drupal Cypress autocomplete
@@ -38,7 +89,7 @@ cy.login(); // login as a default user.
 cy.login('user', 'password'); // as a specific user
 ```
 
-Assmuming there is some other process to create the user.
+Assuming there is some other process to create the user.
 
 ### Drupal Cypress logout
 Logs out of the current session
@@ -58,7 +109,7 @@ cy.mediaLibraryAdd('#field_media_assets-media-library-wrapper', 'sample.png');
 cy.mediaLibraryAdd('#field_media_assets-media-library-wrapper', 'sample.mp3', 'audio');
 ```
 
-### Drupal Cypress select item in media library
+### Drupal Cypress select item in the media library
 Open a media browser modal and selects an existing media item
 
 Can optionally set the type of media uploaded if there is more than one type available.
@@ -70,7 +121,6 @@ cy.mediaLibrarySelect('#field_media_assets-media-library-wrapper', 'sample.png')
 cy.mediaLibrarySelect('#field_media_assets-media-library-wrapper', 'sample.png', 'image');
 ```
 
-
 ### Drupal Cypress upload file
 Upload a file through a file field
 Files should be in the `fixtures` folder.
@@ -78,53 +128,7 @@ Files should be in the `fixtures` folder.
 cy.uploadFile('#file-field-wrapper', 'example.png');`
 ```
 
-## Requirements
-
-* Cypress installed on your local or CI.
-* @TODO Document how we have Cypress set up.
-
-
-## Installation
-
-### Install/update composer installers.
-
-Add two entries in composer.json for an install-type and its path:
-
-```
-"installer-types": ["cypress-support"],
-"installer-paths": {
- // existing entries omitted...
- "tests/cypress/cypress/support/{$name}": [
-   "type:cypress-support"
- ]
-}
-```
-
-### Tell Cypress where to import the tests
-
-In the `support` folder for where your Cypress tests are located, edit `commands.js` and add the
-following:
-
-```
-// Import commands.js using ES2015 syntax:
-import './shrubs/commands'
-```
-
-### To Ignore or not ignore, that is the....
-
-In your `.gitignore` file, add the following to ignore this repository as it is
-installed via composer.
-
-```
-tests/cypress/cypress/support/shrubs
-```
-or if you're ignoring at the cypress level
-```
-/cypress/support/shrubs
-```
-
-If you run a test flow as part of a CI process, do a `composer install` to get the files from the package.
-
+<a name="maintainers"></a>
 ## Maintainers
 
 Current maintainers:
