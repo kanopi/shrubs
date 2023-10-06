@@ -5,7 +5,8 @@ Common support commands for Cypress when interacting with Drupal.
 *Table of Contents*
 * [Requirements](#requirements) 
 * [Installation](#installation) 
-* [Available Commands](#available-commands) 
+* [Available Commands](#available-commands)
+* [Issues](#issues)
 * [Maintainers](#maintainers) 
 
 ## Requirements
@@ -124,6 +125,9 @@ Files should be in the `fixtures` folder.
 ```
 cy.uploadFile('#file-field-wrapper', 'example.png');`
 ```
+
+## Issues
+For issues and support, please use the issue queue at https://www.drupal.org/project/issues/shrubs?categories=All
 
 ## Maintainers
 
