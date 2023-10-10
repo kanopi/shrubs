@@ -26,23 +26,11 @@ cy.get('#id-selector').type(enter-string);
 
 * Choose an autocomplete
 ** Use Cypress autocomplete command will select first option that appears for autocomplete
-Cypress.Commands.add("autocomplete", (selector, content) => {
-  cy.get(selector).type(content).then(($input) => {
-    cy.get('.ui-autocomplete:visible a:first').click();
-  });
-});
-
+[Link to autocomplete](autocomplete.js)
 
 * Fill out a rich text editor field
 ** Use ckeditorType command 
-Cypress.Commands.add("ckeditorType", (selector, content) => {
-  cy.document().then((doc) => {
-    const updatedSelector = selector + ' .ck-editor__editable';
-    const domEditableElement = doc.querySelector( updatedSelector );
-    const editorInstance = domEditableElement.ckeditorInstance;
-    editorInstance.setData( content );
-  })
-});
+[Link to ckeditortype](ckeditorType.js)
 
 * Create a Paragraph
 cy.visit('/node/123/edit');
@@ -104,6 +92,20 @@ cy.get('#edit-menu-parent').select('Main Menu');
 cy.get('#edit-submit').click();
 
 * Include/Exclude a node from a Sitemap
+// Need to test and validate this example code
+cy.visit('/node/123/edit');
+
+// Click on xml sitemap tab dropdown 
+cy.get('.sitemap-settings-details summary').click();
+
+//click on dropdown tabs for sitemap
+cy.get('#edit-xmlsitemap-include').click();
+
+// Select dropdown tab option
+cy.get('#your-dropdown-element').select('Option Text');
+
+// Save changes to node
+cy.get('#edit-submit').click();
 
 * Uploading a file
 
@@ -111,7 +113,7 @@ cy.get('#edit-submit').click();
 
 * Change Revision state
 
-* Add to a menu
+* Add to a menu 
 
 * Schedule a publishing time
 
