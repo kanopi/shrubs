@@ -107,9 +107,16 @@ cy.get('#your-dropdown-element').select('Option Text');
 // Save changes to node
 cy.get('#edit-submit').click();
 
-* Uploading a file
+* Uploading a file (need to test and validate selectFile command works properly)
+cy.get('#file-field-wrapper').as('fileInput'); // Select file input element
+cy.get('@fileInput').selectFile('example.png'); // Upload file
+cy.get('#uploaded-files').should('contain', 'example.png'); // Verify file upload
 
 * Choosing a file from a media library
+[Link to mediaLibrarySelect](mediaLibrarySelect.js)
+
+* Add file from media library
+[Link to mediaLibraryAdd](mediaLibraryAdd.js)
 
 * Change Revision state
 
