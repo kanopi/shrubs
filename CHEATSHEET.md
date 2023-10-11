@@ -3,9 +3,10 @@
 ## Administration
 
 * Log into Drupal
+[Link to login.js](login.js)
 
-cy.login();  // Logins as the default testing user.
-cy.login('username', 'password'); // login as a specific user.
+* Logout 
+[Link to logout](logout.js)
 
 * Go to a page
 cy.visit()
@@ -107,10 +108,8 @@ cy.get('#your-dropdown-element').select('Option Text');
 // Save changes to node
 cy.get('#edit-submit').click();
 
-* Uploading a file (need to test and validate selectFile command works properly)
-cy.get('#file-field-wrapper').as('fileInput'); // Select file input element
-cy.get('@fileInput').selectFile('example.png'); // Upload file
-cy.get('#uploaded-files').should('contain', 'example.png'); // Verify file upload
+* Uploading a file 
+[Link to uploadFile](uploadFile.js)
 
 * Choosing a file from a media library
 [Link to mediaLibrarySelect](mediaLibrarySelect.js)
@@ -119,11 +118,41 @@ cy.get('#uploaded-files').should('contain', 'example.png'); // Verify file uploa
 [Link to mediaLibraryAdd](mediaLibraryAdd.js)
 
 * Change Revision state
+// Changes revision state to published
+cy.visit('/node/1/edit');
+cy.get('#edit-revision-state').as('revisionStateField');
+cy.get('@revisionStateField').select('published');
+cy.get('#edit-form').submit();
+cy.get('#revision-state').should('contain', 'published');
 
 * Add to a menu 
+// Visit content type edit page
+cy.visit('/admin/structure/types/manage/blank')
+cy.get('#edit-menu-settings').as('menuSettingsFieldset');
+cy.get('@menuSettingsFieldset').find('#edit-menu-enabled').as('menu');
+cy.get('@menu').check();
+cy.get('#edit-submit').click();
 
 * Schedule a publishing time
+cy.visit('node/add/article');
+cy.get('#edit-title-0-value').type('My Article Title');
+cy.get('#edit-scheduling-options').click();
+cy.get('#edit-publish-on').type('2023-12-31 00:00:00');
+cy.get('#edit-submit').click();
+cy.get('#scheduled-publishing-time').should('contain', '2023-12-31 00:00:00');
 
 * Schedule an unpublishing time.
+cy.visit('node/1/edit');
+cy.get('#edit-scheduling-options').click();
+cy.get('#edit-unpublish-on').type('2023-12-31 00:00:00');
+cy.get('#edit-submit').click();
+cy.get('#scheduled-unpublishing-time').should('contain', '2023-12-31 00:00:00');
 
 * Write a revision log message
+cy.visit('node/1/edit');
+cy.get('#edit-revision-information').click();
+cy.get('#edit-revision-log-0-value').type('This is a revision log message.');
+cy.get('#edit-submit').click();
+cy.get('#revision-log-message').should('contain', 'This is a revision log message');
+
+
