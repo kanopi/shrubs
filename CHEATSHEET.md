@@ -4,12 +4,14 @@
 
 * Log into Drupal
 [Link to login.js](login.js)
+cy.login('User', 'pass')
 
 * Logout 
 [Link to logout](logout.js)
+cy.logout()
 
 * Go to a page
-cy.visit()
+cy.visit('/path')
 
 ## Creating a Node
 * Go to a node add form
@@ -19,19 +21,21 @@ cy.visit('/node/add'); // Replace with the actual URL of your content
 cy.get('#id-selector').type(enter-string);
 
 * Choose a select list option
-    cy.get('#id-selector').select('option');
+cy.get('#id-selector').select('option');
 
 * Choose a radio or checkbox
 ** In Cypress, you can interact with radio buttons and checkboxes on a Drupal site using the .check() and .click()
-    cy.get('#id-selector').click();
+cy.get('#id-selector').click();
 
 * Choose an autocomplete
 ** Use Cypress autocomplete command will select first option that appears for autocomplete
 [Link to autocomplete](autocomplete.js)
+cy.autocomplete('[data-drupal-selector="edit-field-sample-0-target-id"]', 'item');
 
 * Fill out a rich text editor field
 ** Use ckeditorType command 
 [Link to ckeditortype](ckeditorType.js)
+cy.ckeditorType('#edit-body-0-value', 'string of text')
 
 * Create a Paragraph
 cy.visit('/node/123/edit');
@@ -40,13 +44,10 @@ cy.get('.add-paragraph-button').click();
 
 cy.get('#edit-paragraph-field-name').type('My Paragraph Name');
 // Fill in other paragraph fields here
-
 cy.get('#edit-submit').click();
 
 * Preview a node
-** Need to test this example code and validate it works
 cy.visit('/node/123/edit');
-
 cy.get('.preview-button').click();
 
 // Verify that you are in preview mode
@@ -110,12 +111,15 @@ cy.get('#edit-submit').click();
 
 * Uploading a file 
 [Link to uploadFile](uploadFile.js)
+cy.uploadFile()
 
 * Choosing a file from a media library
 [Link to mediaLibrarySelect](mediaLibrarySelect.js)
+cy.mediaLibrarySelect()
 
 * Add file from media library
 [Link to mediaLibraryAdd](mediaLibraryAdd.js)
+cy.mediaLibraryAdd()
 
 * Change Revision state
 // Changes revision state to published
