@@ -111,15 +111,15 @@ cy.get('#edit-submit').click();
 
 * Uploading a file 
 [Link to uploadFile](uploadFile.js)
-cy.uploadFile()
+cy.uploadFile('#file-field-wrapper', 'example.png')
 
 * Choosing a file from a media library
 [Link to mediaLibrarySelect](mediaLibrarySelect.js)
-cy.mediaLibrarySelect()
+cy.mediaLibrarySelect('#field_media_assets-media-library-wrapper', 'sample.png', 'image')
 
 * Add file from media library
 [Link to mediaLibraryAdd](mediaLibraryAdd.js)
-cy.mediaLibraryAdd()
+cy.mediaLibraryAdd('#field_media_assets-media-library-wrapper', 'sample.mp3', 'audio')
 
 * Change Revision state
 // Changes revision state to published
