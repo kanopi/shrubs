@@ -3,12 +3,19 @@
 ## Administration
 
 ### Log into Drupal
-[Link to login.js](login.js)
+[login.js](login.js)
+
 `cy.login('User', 'pass')`
 
-### Logout 
-[Link to logout](logout.js)
+### Logout of Drupal
+[logout.js](logout.js)
+
 `cy.logout()`
+
+### Use Drush 
+[drush.js](drush.js)
+
+`cy.drush('cr')`
 
 ### Go to a page
 `cy.visit('/path')`
@@ -17,7 +24,6 @@
 ### Go to a node add form
 `cy.visit('/node/add'); // Replace with the actual URL of your content`
 
-
 ### Fill out a text field
 `cy.get('#id-selector').type(enter-string);`
 
@@ -25,18 +31,27 @@
 `cy.get('#id-selector').select('option');`
 
 ### Choose a radio or checkbox
-### In Cypress, you can interact with radio buttons and checkboxes on a Drupal site using the .check() and .click()
+In Cypress, you can interact with radio buttons and checkboxes on a Drupal site using the .check() and .click()
 `cy.get('#id-selector').click();`
 
 ### Choose an autocomplete
-### Use Cypress autocomplete command will select first option that appears for autocomplete
-[Link to autocomplete](autocomplete.js)
+Use Cypress autocomplete command will select first option that appears for autocomplete
+[autocomplete.js](autocomplete.js)
+
 `cy.autocomplete('[data-drupal-selector="edit-field-sample-0-target-id"]', 'item');`
 
 ### Fill out a rich text editor field
-### Use ckeditorType command 
-[Link to ckeditortype](ckeditorType.js)
+[ckeditorType.js](ckeditorType.js)
+
 `cy.ckeditorType('#edit-body-0-value', 'string of text')`
+
+### Validate content in a rich text editor field
+[ckeditorGet.js](ckeditorType.js)
+
+```
+const example_content = 'some text';
+cy.ckeditorGet('#edit-body-wrapper').should('contain', example_content)
+```
 
 ### Create a Paragraph
 ```
@@ -104,7 +119,7 @@ cy.get('#edit-menu-parent').select('Main Menu');
 cy.get('#edit-submit').click();
 ```
 
-### Include/Exclude a node from a Sitemap
+### Include/Exclude a node from an XML Sitemap
 ```
 // Need to test and validate this example code
 cy.visit('/node/123/edit');
@@ -112,7 +127,7 @@ cy.visit('/node/123/edit');
 // Click on xml sitemap tab dropdown 
 cy.get('.sitemap-settings-details summary').click();
 
-//click on dropdown tabs for sitemap
+// Click on dropdown tabs for sitemap
 cy.get('#edit-xmlsitemap-include').click();
 
 // Select dropdown tab option
@@ -123,15 +138,18 @@ cy.get('#edit-submit').click();
 ```
 
 ### Uploading a file 
-[Link to uploadFile](uploadFile.js)
+[uploadFile.js](uploadFile.js)
+
 `cy.uploadFile('#file-field-wrapper', 'example.png')`
 
 ### Choosing a file from a media library
-[Link to mediaLibrarySelect](mediaLibrarySelect.js)
+[mediaLibrarySelect.js](mediaLibrarySelect.js)
+
 `cy.mediaLibrarySelect('#field_media_assets-media-library-wrapper', 'sample.png', 'image')`
 
 ### Add file from media library
-[Link to mediaLibraryAdd](mediaLibraryAdd.js)
+[mediaLibraryAdd.js](mediaLibraryAdd.js)
+
 `cy.mediaLibraryAdd('#field_media_assets-media-library-wrapper', 'sample.mp3', 'audio')`
 
 ### Change Revision state
@@ -181,6 +199,3 @@ cy.get('#edit-revision-log-0-value').type('This is a revision log message.');
 cy.get('#edit-submit').click();
 cy.get('#revision-log-message').should('contain', 'This is a revision log message');
 ```
-
-
-
