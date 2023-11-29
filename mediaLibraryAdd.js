@@ -44,11 +44,11 @@ Cypress.Commands.add("mediaLibraryAdd", (selector, fileName, type="") => {
     }
 
     // Select the uploaded file.
-    cy.get('.form-actions button').contains('Save and select').click()
+    cy.get('.form-actions button').contains('save', { matchCase: false }).click()
     cy.wait('@' + mediaLibraryAjax).its('response.statusCode').should('eq', 200)
 
     // Insert from media library
-    cy.get('.form-actions button').contains('Insert selected').click()
+    cy.get('.form-actions button').contains('insert', { matchCase: false }).click()
     cy.wait('@' + mediaLibraryAjax).its('response.statusCode').should('eq', 200)
   })
 
