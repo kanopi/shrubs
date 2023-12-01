@@ -160,3 +160,45 @@ cy.get('#edit-revision-log-0-value').type('This is a revision log message.');
 cy.get('#edit-submit').click();
 cy.get('#revision-log-message').should('contain', 'This is a revision log message');
 ```
+
+### Create a Content Type
+
+```markdown
+// Visit any content type creation page.
+cy.visit('/node/add/event')
+// Set title, body, and image.
+const nodeTitle = "TEST CONTENT - " +  randCompanyName();
+cy.get("#edit-title-wrapper").type(nodeTitle);
+const nodeBody = randLines();
+cy.ckeditorType('#edit-body-wrapper', nodeBody);
+cy.mediaLibrarySelect('#field_image-media-library-wrapper', 'image-sample_01.png', 'image')
+cy.get("#edit-submit--2--gin-edit-form").click();
+// Validate.
+cy.get('main').should('contain', nodeTitle);
+cy.get('main').should('contain', nodeBody);
+```
+
+### Test a user/user role's ability to create multiple content types
+
+```markdown
+// Create support commands for each content type and run in series with user role.
+cy.login('cypress', 'cypress');
+cy.createDocument();
+cy.createEvent();
+cy.createPage();
+cy.createPerson();
+cy.logout();
+```
+
+### Test if a user/user role can't create content
+
+```markdown
+// User should hit a 403 error on a restricted node/add.
+cy.request({
+  url: '/node/add/event',
+  followRedirect: false,
+  failOnStatusCode: false
+}).then((resp) => {
+    expect(resp.status).to.eq(403)
+})
+```
