@@ -7,7 +7,7 @@
 - [Use Drush](drush.js): `cy.drush('cr')`
 - Go to a page: `cy.visit('/path')`
 
-## Node Operations
+## Content Type Testing
 
 ### Creating a Node
 
@@ -32,6 +32,18 @@
 - Schedule a publishing time: [Code Snippet](#schedule-a-publishing-time)
 - Schedule an unpublishing time: [Code Snippet](#schedule-an-unpublishing-time)
 - Write a revision log message: [Code Snippet](#write-a-revision-log-message)
+
+## User Role Testing
+
+The following commands generally best created as support commands.
+
+- Create a Content Type: [Code Snippet](#create-a-content-type)
+- Test if a user/user role can't create content: [Code Snippet](#user-content-test-if-a-useruser-role-cant-create-content)
+
+Then multiple e2e tests can re-use them like this:
+
+- Test a user/user role's ability to create multiple content types: [Code Snippet](#user-content-test-a-useruser-roles-ability-to-create-multiple-content-types)
+
 
 ## Code Snippets
 
