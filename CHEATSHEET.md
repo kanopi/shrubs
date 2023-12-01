@@ -33,6 +33,11 @@
 - Schedule an unpublishing time: [Code Snippet](#schedule-an-unpublishing-time)
 - Write a revision log message: [Code Snippet](#write-a-revision-log-message)
 
+### Deleting a Node
+
+- Delete a node from node page while logged in: [Code Snippet](#delete-a-piece-of-content-from-the-node-page)
+- Delete a node from the node edit page while logged in: [Code Snippet](#delete-a-piece-of-content-from-the-node-edit-page)
+
 ## User Role Testing
 
 The following commands generally best created as support commands.
@@ -203,7 +208,6 @@ cy.request({
 })
 ```
 
-
 ### Test a user/user role's ability to create multiple content types
 
 ```markdown
@@ -214,4 +218,34 @@ cy.createEvent();
 cy.createPage();
 cy.createPerson();
 cy.logout();
+```
+
+### Delete a piece of content from the node page
+
+```markdown
+// Click node Delete button.
+cy.get('.nav-link').contains('Delete').click();
+// Click confirm delete.
+cy.get('.button--danger').click();
+// Validate, we should be on the home page.
+cy.get('h1').should('contain', 'Hamilton Educational Website');
+```
+
+### Delete a piece of content from the node edit page
+
+```markdown
+// Visit the node edit page.
+cy.visit('node/[nodeID]/edit?destination=/admin/content')
+// Click node Delete button.
+cy.get('#edit-delete--2').click();
+// Create a unique variable name for the ajax listener.  Cypress does not like it being reused.
+const deleteModalAjax = 'deleteModalAjax' + '#edit-delete--2' + Math.random();
+cy.intercept('POST', '/media-library**').as(deleteModalAjax)
+// Get the delete modal and delete the node.
+cy.get('.ui-dialog-buttonpane').within(($modal) => {
+  // Get the delete button in the modal and click.
+  cy.get('.button--danger').contains('Delete', { matchCase: false }).click();
+})
+// Validate, we should be on the admin/content page.
+cy.get('h1').should('contain', 'Content');
 ```
