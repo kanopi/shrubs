@@ -190,18 +190,6 @@ cy.get('main').should('contain', nodeTitle);
 cy.get('main').should('contain', nodeBody);
 ```
 
-### Test a user/user role's ability to create multiple content types
-
-```markdown
-// Create support commands for each content type and run in series with user role.
-cy.login('cypress', 'cypress');
-cy.createDocument();
-cy.createEvent();
-cy.createPage();
-cy.createPerson();
-cy.logout();
-```
-
 ### Test if a user/user role can't create content
 
 ```markdown
@@ -213,4 +201,17 @@ cy.request({
 }).then((resp) => {
     expect(resp.status).to.eq(403)
 })
+```
+
+
+### Test a user/user role's ability to create multiple content types
+
+```markdown
+// Create support commands for each content type and run in series with user role.
+cy.login('cypress', 'cypress');
+cy.createDocument();
+cy.createEvent();
+cy.createPage();
+cy.createPerson();
+cy.logout();
 ```
