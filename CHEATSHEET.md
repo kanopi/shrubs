@@ -223,12 +223,17 @@ cy.logout();
 ### Delete a piece of content from the node page
 
 ```markdown
-// Click node Delete button.
-cy.get('.nav-link').contains('Delete').click();
-// Click confirm delete.
-cy.get('.button--danger').click();
-// Validate, we should be on the home page.
-cy.get('h1').should('contain', 'Hamilton Educational Website');
+Cypress.Commands.add('deleteContentFromNode', (nodeID) => {
+  let nodePath = 'node/' + nodeID;
+  // Visit a node
+  cy.visit(nodePath);
+  // Click node Delete button.
+  cy.get('.nav-link').contains('Delete').click();
+  // Click confirm delete.
+  cy.get('#edit-submit').contains('Delete').click();
+  // Validate, we should be on the home page.
+  cy.location('pathname').should('eq', '/');
+})
 ```
 
 ### Delete a piece of content from the node edit page
@@ -248,4 +253,14 @@ cy.get('.ui-dialog-buttonpane').within(($modal) => {
 })
 // Validate, we should be on the admin/content page.
 cy.get('h1').should('contain', 'Content');
+```
+
+### Check if you are on the front or home page
+
+```markdown
+// Visit the home page
+// Update this URL based on your application's structure
+cy.visit('/');
+// Check if the current URL is the home page
+cy.location('pathname').should('eq', '/');
 ```
