@@ -9,6 +9,8 @@
 
 ## Content Type Testing
 
+Check if you are on the front or home page: [Code Snippet](#check-if-you-are-on-the-front-or-home-page)
+
 ### Creating a Node
 
 - Go to a node add form: `cy.visit('/node/add'); // Replace with the actual URL of your content`
