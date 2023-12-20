@@ -9,7 +9,7 @@
 
 ## Content Type Testing
 
-Check if you are on the front or home page: [Code Snippet](#check-if-you-are-on-the-front-or-home-page)
+- Check if you are on the front or home page: [Code Snippet](#check-if-you-are-on-the-front-or-home-page)
 
 ### Creating a Node
 
