@@ -24,13 +24,13 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-require('./mediaLibraryAdd');
-require('./mediaLibrarySelect');
-require('./uploadFile');
 require('./autocomplete');
 require('./ckeditorGet');
 require('./ckeditorType');
-require('./autocomplete');
+require('./deleteNode');
 require('./drush');
 require('./login');
 require('./logout');
+require('./mediaLibraryAdd');
+require('./mediaLibrarySelect');
+require('./uploadFile');
