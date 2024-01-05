@@ -34,6 +34,7 @@
 - Schedule a publishing time: [Code Snippet](#schedule-a-publishing-time)
 - Schedule an unpublishing time: [Code Snippet](#schedule-an-unpublishing-time)
 - Write a revision log message: [Code Snippet](#write-a-revision-log-message)
+- Tests based on Lighthouse mobile and dekstop viewport sizes: [Code Snippet](#tests-based-on-lighthouse-mobile-and-dekstop-viewport-sizes)
 
 ### Deleting a Node
 
@@ -265,4 +266,27 @@ cy.get('h1').should('contain', 'Content');
 cy.visit('/');
 // Check if the current URL is the home page
 cy.location('pathname').should('eq', '/');
+```
+
+### Tests based on Lighthouse mobile and dekstop viewport sizes
+
+```markdown
+describe('Test based on Lighthouse viewport width.', () => {
+  context('Desktop', () => {
+    it('Desktop Test item', () => {
+      // Vist the home slug and set to Lighthouse desktop viewport size.
+      cy.visit('/')
+      cy.viewport(940, 1350)
+      // Do things.
+    })
+  })
+  context('Mobile', () => {
+    it('Mobile Test item', () => {
+      // Vist the home slug and set to Lighthouse mobile viewport size.
+      cy.visit('/')
+      cy.viewport(940, 1350)
+      // Do things.
+    })
+  })
+})
 ```
