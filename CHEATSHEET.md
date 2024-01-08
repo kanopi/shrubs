@@ -46,6 +46,7 @@ The following commands generally best created as support commands.
 
 - Create a Content Type: [Code Snippet](#create-a-content-type)
 - Test if a user/user role can't create content: [Code Snippet](#user-content-test-if-a-useruser-role-cant-create-content)
+- Test if User or User Role can or can't delete a Content type: [Code Snippet](#test-if-user-or-user-role-can-or-cant-delete-a-content-type)
 
 Then multiple e2e tests can re-use them like this:
 
@@ -220,6 +221,28 @@ cy.createEvent();
 cy.createPage();
 cy.createPerson();
 cy.logout();
+```
+
+### Test if User or User Role can delete a Content type
+```markdown
+it('Test if user role can delete content type.', () => {
+    // Login with role and visit node of specific content type.
+    cy.login('roleToTestName', 'roleToTestPassword')
+    cy.visit(nodePathOfContentType);
+    // Click node Delete button.
+    cy.get('.nav-link').contains('Delete').click();
+    // Click confirm delete.
+    cy.get('#edit-submit').contains('Delete').click();
+    // Validate, we should be on the home page after deletion.
+    cy.location('pathname').should('eq', '/');
+})
+it('Test if user role can't delete content type.', () => {
+    // Login with role and visit node of specific content type.
+    cy.login('roleToTestName', 'roleToTestPassword')
+    cy.visit(nodePathOfContentType);
+    // Assert that the button should not exist on the page.
+    cy.get('.nav-link').contains('Delete').should('not.exist');
+})
 ```
 
 ### Delete a piece of content from the node page
