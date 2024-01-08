@@ -3,7 +3,7 @@
 // cy.login('username', 'password'); // login as a specific user.
 
 Cypress.Commands.add('login', (usernameParam = '', password = '') => {
-    cy.visit('/user/logout')
+    cy.logout()
     cy.visit('/user/login')
     let username = '';
     let default_user = false;
