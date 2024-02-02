@@ -35,6 +35,7 @@
 - Schedule a publishing time: [Code Snippet](#schedule-a-publishing-time)
 - Schedule an unpublishing time: [Code Snippet](#schedule-an-unpublishing-time)
 - Write a revision log message: [Code Snippet](#write-a-revision-log-message)
+- Open a field group tab in the admin: [Code Snippet](#open-a-field-group-tab-in-the-admin)
 - Tests based on Lighthouse mobile and dekstop viewport sizes: [Code Snippet](#tests-based-on-lighthouse-mobile-and-dekstop-viewport-sizes)
 
 ### Deleting a Node
@@ -209,6 +210,13 @@ cy.get('#edit-revision-information').click();
 cy.get('#edit-revision-log-0-value').type('This is a revision log message.');
 cy.get('#edit-submit').click();
 cy.get('#revision-log-message').should('contain', 'This is a revision log message');
+```
+
+### Open a field group tab in the admin
+```markdown
+cy.visit('/node/[nodeID]/edit');
+// Switch to the horizontal content tab.
+cy.get('#node-page-edit-form').contains('Content').click()
 ```
 
 ### Create a Content Type
