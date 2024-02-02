@@ -21,6 +21,7 @@
 - [Fill out a rich text editor field](ckeditorType.js): `cy.ckeditorType('#edit-body-0-value', 'string of text')`
 - [Validate content in a rich text editor field](ckeditorGet.js): `const example_content = 'some text'; cy.ckeditorGet('#edit-body-wrapper').should('contain', example_content)`
 - Create a Paragraph: [Code Snippet](#create-a-paragraph)
+- Create multiple Paragraphs with additional fields: [Code Snippet](#create-multiple-paragraphs-with-additional-fields)
 - Preview a node: [Code Snippet](#preview-a-node)
 - Save a node: [Code Snippet](#save-a-node)
 - Change a node's path: [Code Snippet](#change-a-nodes-path)
@@ -35,6 +36,7 @@
 - Schedule an unpublishing time: [Code Snippet](#schedule-an-unpublishing-time)
 - Write a revision log message: [Code Snippet](#write-a-revision-log-message)
 - Open a field group tab in the admin: [Code Snippet](#open-a-field-group-tab-in-the-admin)
+- Tests based on Lighthouse mobile and dekstop viewport sizes: [Code Snippet](#tests-based-on-lighthouse-mobile-and-dekstop-viewport-sizes)
 
 ### Deleting a Node
 
@@ -47,6 +49,7 @@ The following commands generally best created as support commands.
 
 - Create a Content Type: [Code Snippet](#create-a-content-type)
 - Test if a user/user role can't create content: [Code Snippet](#user-content-test-if-a-useruser-role-cant-create-content)
+- Test if User or User Role can or can't delete a Content type: [Code Snippet](#test-if-user-or-user-role-can-or-cant-delete-a-content-type)
 
 Then multiple e2e tests can re-use them like this:
 
@@ -63,6 +66,34 @@ cy.get('.add-paragraph-button').click();
 cy.get('#edit-paragraph-field-name').type('My Paragraph Name');
 // Fill in other paragraph fields here
 cy.get('#edit-submit').click();
+```
+
+### Create multiple Paragraphs with additional fields
+```markdown
+it('Create a test paragraph.', () => {
+  // Login and visit specified node.
+  cy.login('cypress', 'cypress')
+  cy.visit('/node/289/edit');
+  cy.wait(500);
+  // Switch to the content tab.
+  cy.get('#node-page-edit-form').contains('Content').click();
+  // Get the Entity Reference Revisions (Paragraphs) field's dropdown button and click it.
+  cy.get('[data-drupal-selector="edit-field-components-add-more"] .dropbutton__toggle').click();
+  // Get the name of the paragraph type you want and click that.
+  cy.get('input[name="field_components_image_and_text_add_more"]').click();
+  // Now we're in the subform and we can fill out the fields, Title, link uri, and link title.
+  cy.get('input[name="field_components[0][subform][field_title][0][value]"]').type('Title');
+  cy.get('[data-drupal-selector="edit-field-components-0-subform-field-link-0-uri"]').type('www.google.com');
+  cy.get('[data-drupal-selector="edit-field-components-0-subform-field-link-0-title"]').type('Google');
+  // Add another paragraph and fill out the fields.
+  cy.get('[data-drupal-selector="edit-field-components-add-more"] .dropbutton__toggle').click();
+  cy.get('input[name="field_components_call_to_action_add_more"]').click();
+  cy.get('input[name="field_components[1][subform][field_title][0][value]"]').type('Title');
+  cy.get('[data-drupal-selector="edit-field-components-1-subform-field-link-0-uri"]').type('www.google.com');
+  cy.get('[data-drupal-selector="edit-field-components-1-subform-field-link-0-title"]').type('Google');
+  // Save the node.
+  cy.get("#edit-submit--2--gin-edit-form").click();
+})
 ```
 
 ### Preview a Node
@@ -230,6 +261,28 @@ cy.createPerson();
 cy.logout();
 ```
 
+### Test if User or User Role can delete a Content type
+```markdown
+it('Test if user role can delete content type.', () => {
+    // Login with role and visit node of specific content type.
+    cy.login('roleToTestName', 'roleToTestPassword')
+    cy.visit(nodePathOfContentType);
+    // Click node Delete button.
+    cy.get('.nav-link').contains('Delete').click();
+    // Click confirm delete.
+    cy.get('#edit-submit').contains('Delete').click();
+    // Validate, we should be on the home page after deletion.
+    cy.location('pathname').should('eq', '/');
+})
+it('Test if user role can't delete content type.', () => {
+    // Login with role and visit node of specific content type.
+    cy.login('roleToTestName', 'roleToTestPassword')
+    cy.visit(nodePathOfContentType);
+    // Assert that the button should not exist on the page.
+    cy.get('.nav-link').contains('Delete').should('not.exist');
+})
+```
+
 ### Delete a piece of content from the node page
 
 ```markdown
@@ -273,4 +326,27 @@ cy.get('h1').should('contain', 'Content');
 cy.visit('/');
 // Check if the current URL is the home page
 cy.location('pathname').should('eq', '/');
+```
+
+### Tests based on Lighthouse mobile and dekstop viewport sizes
+
+```markdown
+describe('Test based on Lighthouse viewport width.', () => {
+  context('Desktop', () => {
+    it('Desktop Test item', () => {
+      // Vist the home slug and set to Lighthouse desktop viewport size.
+      cy.visit('/')
+      cy.viewport(940, 1350)
+      // Do things.
+    })
+  })
+  context('Mobile', () => {
+    it('Mobile Test item', () => {
+      // Vist the home slug and set to Lighthouse mobile viewport size.
+      cy.visit('/')
+      cy.viewport(940, 1350)
+      // Do things.
+    })
+  })
+})
 ```
