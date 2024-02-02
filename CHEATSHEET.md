@@ -7,6 +7,10 @@
 - [Use Drush](drush.js): `cy.drush('cr')`
 - Go to a page: `cy.visit('/path')`
 
+## Systems Testing
+
+- Check Sendgrid works: [Code Snippet](#check-sendgrid-works)
+
 ## Content Type Testing
 
 - Check if you are on the front or home page: [Code Snippet](#check-if-you-are-on-the-front-or-home-page)
@@ -348,5 +352,21 @@ describe('Test based on Lighthouse viewport width.', () => {
       // Do things.
     })
   })
+})
+```
+
+
+### Check Sendgrid works
+
+```
+describe('Check sendgrid is sending emails', () => {
+    it('Login and send a test email', () => {
+        cy.login()
+        cy.visit('/admin/config/services/sendgrid/test')
+        const mailinatorEmail = '1234567890@mailinator.com';
+        cy.get('#edit-to').clear().type(mailinatorEmail);
+        cy.get('#edit-submit').click()
+        cy.get('.messages-list .messages--status').should('contain', 'SendGrid test email sent')    
+    })
 })
 ```
