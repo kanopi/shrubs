@@ -21,6 +21,7 @@
 - [Fill out a rich text editor field](ckeditorType.js): `cy.ckeditorType('#edit-body-0-value', 'string of text')`
 - [Validate content in a rich text editor field](ckeditorGet.js): `const example_content = 'some text'; cy.ckeditorGet('#edit-body-wrapper').should('contain', example_content)`
 - Create a Paragraph: [Code Snippet](#create-a-paragraph)
+- Create multiple Paragraphs with additional fields: [Code Snippet](#create-multiple-paragraphs-with-additional-fields)
 - Preview a node: [Code Snippet](#preview-a-node)
 - Save a node: [Code Snippet](#save-a-node)
 - Change a node's path: [Code Snippet](#change-a-nodes-path)
@@ -64,6 +65,34 @@ cy.get('.add-paragraph-button').click();
 cy.get('#edit-paragraph-field-name').type('My Paragraph Name');
 // Fill in other paragraph fields here
 cy.get('#edit-submit').click();
+```
+
+### Create multiple Paragraphs with additional fields
+```markdown
+it('Create a test paragraph.', () => {
+  // Login and visit specified node.
+  cy.login('cypress', 'cypress')
+  cy.visit('/node/289/edit');
+  cy.wait(500);
+  // Switch to the content tab.
+  cy.get('#node-page-edit-form').contains('Content').click();
+  // Get the Entity Reference Revisions (Paragraphs) field's dropdown button and click it.
+  cy.get('[data-drupal-selector="edit-field-components-add-more"] .dropbutton__toggle').click();
+  // Get the name of the paragraph type you want and click that.
+  cy.get('input[name="field_components_image_and_text_add_more"]').click();
+  // Now we're in the subform and we can fill out the fields, Title, link uri, and link title.
+  cy.get('input[name="field_components[0][subform][field_title][0][value]"]').type('Title');
+  cy.get('[data-drupal-selector="edit-field-components-0-subform-field-link-0-uri"]').type('www.google.com');
+  cy.get('[data-drupal-selector="edit-field-components-0-subform-field-link-0-title"]').type('Google');
+  // Add another paragraph and fill out the fields.
+  cy.get('[data-drupal-selector="edit-field-components-add-more"] .dropbutton__toggle').click();
+  cy.get('input[name="field_components_call_to_action_add_more"]').click();
+  cy.get('input[name="field_components[1][subform][field_title][0][value]"]').type('Title');
+  cy.get('[data-drupal-selector="edit-field-components-1-subform-field-link-0-uri"]').type('www.google.com');
+  cy.get('[data-drupal-selector="edit-field-components-1-subform-field-link-0-title"]').type('Google');
+  // Save the node.
+  cy.get("#edit-submit--2--gin-edit-form").click();
+})
 ```
 
 ### Preview a Node
