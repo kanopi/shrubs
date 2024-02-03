@@ -1,3 +1,5 @@
+![shrubs](https://github.com/kanopi/shrubs/assets/5177009/e0d0ed6e-7e08-43be-9c82-69119bb19ab5)
+
 # Shrubs (Drupal Cypress Support Commands)
 
 Common support commands for Cypress when interacting with Drupal.
