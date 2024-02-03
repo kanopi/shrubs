@@ -40,7 +40,7 @@ Cypress.Commands.add("mediaLibraryAdd", (selector, fileName, type="") => {
 
     // Basic check if the file is an image so we know if we have to add some alt tags.
     if (fileName.includes(".png") || fileName.includes(".jpg")) {
-      cy.get('input[name="media[0][fields][field_media_image][0][alt]"]').type('alt text');
+      cy.get('.media-library-add-form').contains('Alternative text').next().type('alt text');
     }
 
     // Select the uploaded file.
