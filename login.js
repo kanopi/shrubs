@@ -16,16 +16,16 @@ Cypress.Commands.add('login', (usernameParam = '', password = '') => {
     }
 
     if (default_user) {
-        cy.get('#edit-name').type(username);
-        cy.get('#edit-pass').type('cypress');
+        cy.get('form.user-login-form #edit-name').type(username);
+        cy.get('form.user-login-form #edit-pass').type('cypress');
     }
     else {
-        cy.get('#edit-name').type(username);
-        cy.get('#edit-pass').type(password);
+        cy.get('form.user-login-form #edit-name').type(username);
+        cy.get('form.user-login-form #edit-pass').type(password);
     }
 
     // Login.
-    cy.get('.form-submit').click();
+    cy.get('form.user-login-form .form-submit').click();
     cy.wait(500) // Wait for the UI to catch up.
 
     // Check user page loads.
