@@ -97,6 +97,35 @@ Logs out of the current session
 cy.logout();
 ```
 
+### Ajax Click
+
+There a clicks that can generate a blocking ajax request. I.E. Opening modals or
+slideouts that load content with an ajax request.
+
+The function will wrap an intercept/wait combination around the click to make
+sure the tests don't continue until the ajax request as completed.
+
+It's also meant to deal with the anti-pattern of using [wait()](https://docs.cypress.io/guides/references/best-practices#Unnecessary-Waiting) for clicks that trigger ajax requests.
+
+**Example**
+```
+cy.ajaxClick("a.product-name", '/jsonapi/*/**')
+```
+
+This replaces code that would look like this.
+
+```
+const jsonApiRequest5 = 'jsonApiRequest' + Math.random();
+cy.intercept('GET', '/jsonapi/*/**').as(jsonApiRequest5)
+cy.get('a.product-name').click();
+cy.wait('@' + jsonApiRequest5).its('response.statusCode').should('eq', 200)
+```
+or
+```
+cy.get('a.product-name').click();
+cy.wait(5000)
+```
+
 ### Drupal Cypress add item to media library
 Uploads a file to the media library and selects it in the field.
 
