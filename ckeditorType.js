@@ -1,5 +1,5 @@
 /**
- * Set the value set in a ckeditor instance.
+ * Set the value set in a CKEditor instance.
  *
  * Selector: The wrapping selector of the textfield form and searches within it for the ckEditor instance.
  * Content: A string.
@@ -10,6 +10,8 @@
  *
  * Examples:
  * cy.ckeditorSet('#field_body-wrapper', 'This is a string of content');
+ * If the Summary is exposed by default, you need to find the second CKEditor:
+ * cy.ckeditorType('#edit-body-wrapper .form-item--body-0-value', 'This is a string of content');
  */
 Cypress.Commands.add("ckeditorType", (selector, content) => {
   cy.document().then((doc) => {
