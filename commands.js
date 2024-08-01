@@ -24,6 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+require('./ajaxClick')
 require('./autocomplete');
 require('./ckeditorGet');
 require('./ckeditorType');
