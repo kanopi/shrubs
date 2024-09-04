@@ -67,10 +67,10 @@ Gets the value of a ckeditor instance.
 cy.ckeditorGet('#edit-body-wrapper').should('contain', 'hello world')
 ```
 
-### Drupal Cypress ckEditor set
+### Drupal Cypress ckEditor type
 Set the value of a ckeditor instance.
 ```
-cy.ckeditorSet('#field_body-wrapper', 'hello world');
+cy.ckeditorType('#field_body-wrapper', 'hello world');
 ```
 
 ### Drupal Cypress drush
