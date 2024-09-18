@@ -12,10 +12,9 @@
  */
 Cypress.Commands.add("mediaLibrarySelect", (selector, fileName, type="") => {
   // Create a unique variable name for the ajax listener.  Cypress does not like it being reused.
-  const mediaNodeEditAjax = 'mediaNodeEditAjax' + selector + Math.random();
-  cy.intercept('POST', '/node/*/**').as(mediaNodeEditAjax)
-
   cy.get(selector).within(() => {
+    const mediaNodeEditAjax = 'mediaNodeEditAjax' + selector + Math.random();
+    cy.intercept('POST', '/node/*/**').as(mediaNodeEditAjax)
     cy.get('input[value="Add media"]').click();
     cy.wait('@'+mediaNodeEditAjax).its('response.statusCode').should('eq', 200)
   });
@@ -26,7 +25,7 @@ Cypress.Commands.add("mediaLibrarySelect", (selector, fileName, type="") => {
     if ($modal.find('.media-library-menu').length) {
       if (type.length > 0) {
         const buttonClass= ".media-library-menu-" + type
-        mediaLibraryAjax = 'mediaLibraryAjax' + selector + Math.random();
+        const mediaLibraryAjax = 'mediaLibraryAjax' + selector + Math.random();
         cy.intercept('POST', '/media-library**').as(mediaLibraryAjax)
         cy.get(buttonClass).click();
         cy.wait('@' + mediaLibraryAjax).its('response.statusCode').should('eq', 200)
@@ -35,7 +34,7 @@ Cypress.Commands.add("mediaLibrarySelect", (selector, fileName, type="") => {
 
     // Search for the file.
     cy.get('.views-exposed-form input[name="name"]').clear().type(fileName);
-    let viewsAjax = 'viewsAjax' + selector + Math.random();
+    const viewsAjax = 'viewsAjax' + selector + Math.random();
     cy.intercept('GET', '/views/ajax?**').as(viewsAjax)
     cy.get('.views-exposed-form input[type="submit"]').click();
     cy.wait('@' + viewsAjax).its('response.statusCode').should('eq', 200)
@@ -45,12 +44,10 @@ Cypress.Commands.add("mediaLibrarySelect", (selector, fileName, type="") => {
     cy.get('.media-library-views-form .views-row').first().click();
 
     // Insert from media library
-    mediaLibraryAjax = 'mediaLibraryAjax' + selector + Math.random();
-    cy.intercept('POST', '/media-library?**').as(mediaLibraryAjax)
+    const mediaLibraryAjax2 = 'mediaLibraryAjax' + selector + Math.random();
+    cy.intercept('POST', '/media-library?**').as(mediaLibraryAjax2)
     cy.get('.form-actions button').contains('Insert selected').click()
-    cy.wait('@' + mediaLibraryAjax).its('response.statusCode').should('eq', 200)
+    cy.wait('@' + mediaLibraryAjax2).its('response.statusCode').should('eq', 200)
   })
 
-  cy.wait('@'+mediaNodeEditAjax).its('response.statusCode').should('eq', 200)
-  cy.wait(500)
 });
