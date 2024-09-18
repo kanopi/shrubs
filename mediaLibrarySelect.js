@@ -20,17 +20,14 @@ Cypress.Commands.add("mediaLibrarySelect", (selector, fileName, type="") => {
     cy.wait('@'+mediaNodeEditAjax).its('response.statusCode').should('eq', 200)
   });
 
-  const mediaLibraryAjax = 'mediaLibraryAjax' + selector + Math.random();
-  cy.intercept('POST', '/media-library**').as(mediaLibraryAjax)
-  const viewsAjax = 'viewsAjax' + selector + Math.random();
-  cy.intercept('GET', '/views/ajax?**').as(viewsAjax)
-
   // Get the media modal and add files.
   cy.get('.media-library-widget-modal').within(($modal) => {
     // Check if we need to select media type
     if ($modal.find('.media-library-menu').length) {
       if (type.length > 0) {
         const buttonClass= ".media-library-menu-" + type
+        mediaLibraryAjax = 'mediaLibraryAjax' + selector + Math.random();
+        cy.intercept('POST', '/media-library**').as(mediaLibraryAjax)
         cy.get(buttonClass).click();
         cy.wait('@' + mediaLibraryAjax).its('response.statusCode').should('eq', 200)
       }
@@ -38,22 +35,20 @@ Cypress.Commands.add("mediaLibrarySelect", (selector, fileName, type="") => {
 
     // Search for the file.
     cy.get('.views-exposed-form input[name="name"]').clear().type(fileName);
+    let viewsAjax = 'viewsAjax' + selector + Math.random();
+    cy.intercept('GET', '/views/ajax?**').as(viewsAjax)
     cy.get('.views-exposed-form input[type="submit"]').click();
-    // Ajax intercept doesn't seem to work in this instance for some reason...
-    // cy.wait('@' + viewsAjax).its('response.statusCode').should('eq', 200)
-    // Changing to cy.wait()
-    cy.wait(7000)
+    cy.wait('@' + viewsAjax).its('response.statusCode').should('eq', 200)
+
 
     // Select the first match
     cy.get('.media-library-views-form .views-row').first().click();
 
     // Insert from media library
+    mediaLibraryAjax = 'mediaLibraryAjax' + selector + Math.random();
+    cy.intercept('POST', '/media-library?**').as(mediaLibraryAjax)
     cy.get('.form-actions button').contains('Insert selected').click()
-    cy.wait(7000)
-    // Ajax intercept doesn't seem to work in this instance for some reason...
-    // const mediaLibraryAjax2 = 'mediaLibraryAjax' + selector + Math.random();
-    // cy.intercept('POST', '/media-library?**').as(mediaLibraryAjax2)
-    // cy.wait('@' + mediaLibraryAjax2).its('response.statusCode').should('eq', 200)
+    cy.wait('@' + mediaLibraryAjax).its('response.statusCode').should('eq', 200)
   })
 
   cy.wait('@'+mediaNodeEditAjax).its('response.statusCode').should('eq', 200)
