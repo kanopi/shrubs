@@ -19,16 +19,19 @@ Cypress.Commands.add("mediaLibrarySelect", (selector, fileName, type="") => {
     cy.wait('@'+mediaNodeEditAjax).its('response.statusCode').should('eq', 200)
   });
 
+  const mediaNodeEditAjax2 = 'mediaNodeEditAjax' + selector + Math.random();
+  cy.intercept('POST', '/node/*/**').as(mediaNodeEditAjax2)
+
   // Get the media modal and add files.
   cy.get('.media-library-widget-modal').within(($modal) => {
     // Check if we need to select media type
     if ($modal.find('.media-library-menu').length) {
       if (type.length > 0) {
         const buttonClass= ".media-library-menu-" + type
-        const mediaLibraryAjax = 'mediaLibraryAjax' + selector + Math.random();
-        cy.intercept('POST', '/media-library**').as(mediaLibraryAjax)
+        const mediaLibraryAjaxMenu = 'mediaLibraryAjax' + selector + Math.random();
+        cy.intercept('POST', '/media-library**').as(mediaLibraryAjaxMenu)
         cy.get(buttonClass).click();
-        cy.wait('@' + mediaLibraryAjax).its('response.statusCode').should('eq', 200)
+        cy.wait('@' + mediaLibraryAjaxMenu).its('response.statusCode').should('eq', 200)
       }
     }
 
@@ -49,5 +52,6 @@ Cypress.Commands.add("mediaLibrarySelect", (selector, fileName, type="") => {
     cy.get('.form-actions button').contains('Insert selected').click()
     cy.wait('@' + mediaLibraryAjax2).its('response.statusCode').should('eq', 200)
   })
-  cy.wait(500)
+
+  cy.wait('@'+mediaNodeEditAjax2).its('response.statusCode').should('eq', 200)
 });

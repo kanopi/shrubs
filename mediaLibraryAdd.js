@@ -18,6 +18,9 @@ Cypress.Commands.add("mediaLibraryAdd", (selector, fileName, type="") => {
     cy.wait('@'+mediaNodeEditAjax).its('response.statusCode').should('eq', 200)
   });
 
+  const mediaNodeEditAjax2 = 'mediaNodeEditAjax' + selector + Math.random();
+  cy.intercept('POST', '/node/*/**').as(mediaNodeEditAjax2)
+
   // Get the media modal and add files.
   cy.get('.media-library-widget-modal').within(($modal) => {
     // Check if we need to select media type
@@ -55,6 +58,6 @@ Cypress.Commands.add("mediaLibraryAdd", (selector, fileName, type="") => {
     cy.get('.form-actions button').contains('insert', { matchCase: false }).click()
     cy.wait('@' + mediaLibraryAjax3).its('response.statusCode').should('eq', 200)
   })
-  cy.wait(500)
 
+  cy.wait('@'+mediaNodeEditAjax2).its('response.statusCode').should('eq', 200)
 });
