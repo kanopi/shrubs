@@ -55,5 +55,6 @@ Cypress.Commands.add("mediaLibraryAdd", (selector, fileName, type="") => {
     cy.get('.form-actions button').contains('insert', { matchCase: false }).click()
     cy.wait('@' + mediaLibraryAjax3).its('response.statusCode').should('eq', 200)
   })
+  cy.wait(500)
 
 });
