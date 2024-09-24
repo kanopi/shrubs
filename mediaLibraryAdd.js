@@ -36,7 +36,7 @@ Cypress.Commands.add("mediaLibraryAdd", (selector, fileName, type="") => {
 
     // Upload the file.
     const mediaLibraryAjax1 = 'mediaLibraryAjax' + selector + Math.random();
-    cy.intercept('POST', '/media-library**').as(mediaLibraryAjax1)
+    cy.intercept('POST', '/media-library?*').as(mediaLibraryAjax1)
     cy.get('input[type=file]').selectFile('cypress/fixtures/' + fileName);
     cy.wait('@' + mediaLibraryAjax1).its('response.statusCode').should('eq', 200)
 
@@ -48,7 +48,7 @@ Cypress.Commands.add("mediaLibraryAdd", (selector, fileName, type="") => {
 
     // Select the uploaded file.
     const mediaLibraryAjax2 = 'mediaLibraryAjax' + selector + Math.random();
-    cy.intercept('POST', '/media-library**').as(mediaLibraryAjax2)
+    cy.intercept('POST', '/media-library?*').as(mediaLibraryAjax2)
     cy.get('.form-actions button').contains('save', { matchCase: false }).click()
     cy.wait('@' + mediaLibraryAjax2).its('response.statusCode').should('eq', 200)
 
