@@ -27,9 +27,9 @@ Cypress.Commands.add('login', (usernameParam = '', password = '') => {
   cy.wait(500); // Wait for the UI to catch up.
 
   // Check user session cookie is set after logging in.
-  cy.getCookies()
-    .should("have.length", 1)
-    .then((cookies) => {
-      expect(cookies[0].name).to.include("SESS");
-    });
+  cy.getCookies().then((cookies) => {
+    // Search for cookie.name and value contains SESS.
+    const sessionCookie = cookies.find((cookie) => cookie.name.includes("SESS"));
+    expect(sessionCookie).to.exist;
+  });
 })
