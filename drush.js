@@ -14,6 +14,9 @@ Cypress.Commands.add('drush', (command, options = {}) => {
     exec_command = 'lando drush '  + command;
   }
 
+  if (Cypress.env('DRUSH_IS_DDEV')) {
+    exec_command = 'ddev drush '  + command;
+  }
 
   // In the format of PANTHEON_SITE_ID.ENVIRONMENT_ID
   if(Cypress.env('DRUSH_IS_PANTHEON')) {
