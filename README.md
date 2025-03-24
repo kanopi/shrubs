@@ -157,6 +157,41 @@ Files should be in the `fixtures` folder.
 cy.uploadFile('#file-field-wrapper', 'example.png');`
 ```
 
+### logAndStore(message)
+Logs a message and stores it in an internal array to be retrieved later using
+`cy.logSummary();`
+
+```
+cy.logAndStore('This is a log message.');
+```
+
+### logSummary()
+
+Outputs all stored log messages at the end of a test run.
+
+```
+cy.logSummary();
+```
+
+Example with after() Hook
+```
+describe('Example Test with log summary', () => {
+  beforeEach(() => {
+    cy.visit('/example-page');
+  });
+
+  it('should log multiple steps', () => {
+    cy.logAndStore('Step 1: Visiting the page.');
+    cy.logAndStore('Step 2: Clicking a button.');
+    cy.logAndStore('Step 3: Validating output.');
+  });
+
+  after(() => {
+    cy.logSummary();
+  });
+});
+```
+
 ## Issues
 For issues and support, please use the issue queue at https://www.drupal.org/project/issues/shrubs?categories=All
 
