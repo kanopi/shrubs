@@ -82,7 +82,7 @@ cy.drush('status');
 ```
 
 ### Drupal Cypress login
-Logins in through the default Drupal login form.
+Login through the default Drupal login form.
 Sets a default login but also passing custom login details
 
 ```
