@@ -82,6 +82,7 @@ cy.drush('status');
 ```
 
 ### Drupal Cypress login
+Login through the default Drupal login form.
 Sets a default login but also passing custom login details
 
 ```
@@ -90,6 +91,12 @@ cy.login('user', 'password'); // as a specific user
 ```
 
 Assuming there is some other process to create the user.
+
+### Drupal Cypress login as a specific user
+Uses a Drush one time login links to login as a specific user.
+```   
+cy.loginOneTimeLink('myusername');
+```
 
 ### Drupal Cypress logout
 Logs out of the current session

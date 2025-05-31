@@ -32,6 +32,7 @@ require('./deleteNode');
 require('./drush');
 require('./logAndStore');
 require('./login');
+require('./loginOneTimeLink');
 require('./logout');
 require('./logSummary');
 require('./mediaLibraryAdd');
