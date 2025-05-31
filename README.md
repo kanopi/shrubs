@@ -192,6 +192,41 @@ describe('Example Test with log summary', () => {
 });
 ```
 
+## Pantheon interstitial page and Cypress tests
+
+In May 2025 [Pantheon added an Interstitial page](https://docs.pantheon.io/release-notes/2025/05/interstitial-pages) to projects that are at the Sandbox level.  Kanopi has the following work around of overwriting the `visit()` command.
+
+In `e2e.js`
+```js
+/**
+ * Overwrite the visit() command to support setting headers globally.
+ */
+Cypress.Commands.overwrite("visit", (originalVisit, url, options = {}) => {
+  const globalHeaders = Cypress.env('visitHeaders') || {};
+
+  // Combine global and specific headers from the unique call of visit().
+  const headers = Object.assign({}, globalHeaders, options.headers);
+
+  // Call the real visit with the merged headers
+  return originalVisit(url, { ...options, headers });
+});
+```
+In your `cypress.config.js` you can add the following environment variable.
+```js
+env: {
+  "visitHeaders" : {
+    "Deterrence-Bypass" : "1"
+  }
+}
+```
+Now when the `visit()` command is done you dont have to worry about a cookie being set prior.
+
+If you want to set the cookie to bypass the page later you can do so with.
+```js
+cy.setCookie("Deterrence-Bypass", "1");
+```
+
+
 ## Issues
 For issues and support, please use the issue queue at https://www.drupal.org/project/issues/shrubs?categories=All
 
