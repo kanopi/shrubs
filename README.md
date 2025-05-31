@@ -95,7 +95,7 @@ Assuming there is some other process to create the user.
 ### Drupal Cypress login as a specific user
 Uses a Drush one time login links to login as a specific user.
 ```   
-cy.loginAsUser('myusername');
+cy.loginOneTimeLink('myusername');
 ```
 
 ### Drupal Cypress logout
