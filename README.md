@@ -115,9 +115,8 @@ In the format of `PANTHEON_SITE_ID.ENVIRONMENT_ID`
 }
 ```
 **Tugboat**
-
-`DRUSH_IS_TUGBOAT` is your [Tugboat token](https://docs.tugboatqa.com/tugboat-cli/set-an-access-token/index.html)
-`TUGBOAT_INSTANCE_ID` is the ID of the specific Tugboat instance that is targeted [$TUGBOAT_PREVIEW_ID](https://docs.tugboatqa.com/reference/environment-variables/index.html#image-specific-variables)
+* `DRUSH_IS_TUGBOAT` is your [Tugboat token](https://docs.tugboatqa.com/tugboat-cli/set-an-access-token/index.html)
+* `TUGBOAT_INSTANCE_ID` is the ID of the specific Tugboat instance that is targeted [$TUGBOAT_PREVIEW_ID](https://docs.tugboatqa.com/reference/environment-variables/index.html#image-specific-variables)
 ```json
 {
   "DRUSH_IS_TUGBOAT" : "12345abcdef",
