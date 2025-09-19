@@ -5,11 +5,11 @@
 Common support commands for Cypress when interacting with Drupal.
 
 *Table of Contents*
-* [Requirements](#requirements) 
-* [Installation](#installation) 
+* [Requirements](#requirements)
+* [Installation](#installation)
 * [Available Commands](#available-commands)
 * [Issues](#issues)
-* [Maintainers](#maintainers) 
+* [Maintainers](#maintainers)
 
 ## Requirements
 
@@ -44,7 +44,7 @@ import './shrubs/commands'
 
 ### Requiring Shrubs using Composer
 
-The Shrubs repository is available via Packagist. 
+The Shrubs repository is available via Packagist.
 
 Once you have completed the steps above, run the following command:
 
@@ -74,11 +74,64 @@ cy.ckeditorType('#field_body-wrapper', 'hello world');
 ```
 
 ### Drupal Cypress drush
-Runs Drush commands in multiple environments
+Runs Drush commands in multiple environments.
+With the correct configuration it can taget the following:
+* Docksal
+* Lando
+* DDEV
+* Pantheon
+* Tugboat
 
-Support running commands against Pantheon multidev environments as well.
 ```
 cy.drush('status');
+```
+
+#### Config examples
+Set these as environment variables or in your cypress.env.json
+**Docksal**
+```json
+{
+  "DRUSH_IS_DOCKSAL" : true
+}
+```
+**Lando**
+```json
+{
+  "DRUSH_IS_LANDO" : true
+}
+```
+**DDEV**
+```json
+{
+  "DRUSH_IS_DDEV" : true
+}
+```
+**Pantheon**
+In the format of `PANTHEON_SITE_ID.ENVIRONMENT_ID`
+```json
+{
+  "DRUSH_IS_PANTHEON" : "mysite.pr-123"
+}
+```
+**Tugboat**
+`DRUSH_IS_TUGBOAT` is your [Tugboat token](https://docs.tugboatqa.com/tugboat-cli/set-an-access-token/index.html)
+`TUGBOAT_INSTANCE_ID` is the ID of the specific Tugboat instance that is targeted [$TUGBOAT_PREVIEW_ID](https://docs.tugboatqa.com/reference/environment-variables/index.html#image-specific-variables)
+```json
+{
+  "DRUSH_IS_TUGBOAT" : "12345abcdef",
+  "TUGBOAT_INSTANCE_ID" : "1234567890"
+}
+```
+##### Tugboat
+
+The Tugboat CLI needs a little extra help being installed in AMD64 architecture.
+
+```bash
+sudo dpkg --add-architecture amd64
+sudo apt-get update
+sudo apt-get install libc6:amd64 libstdc++6:amd64
+wget https://dashboard.tugboatqa.com/cli/linux/tugboat.tar.gz
+sudo tar -zxf tugboat.tar.gz -C /usr/local/bin/
 ```
 
 ### Drupal Cypress login
@@ -86,7 +139,7 @@ Login through the default Drupal login form.
 Sets a default login but also passing custom login details
 
 ```
-cy.login(); // login as a default user.   
+cy.login(); // login as a default user.
 cy.login('user', 'password'); // as a specific user
 ```
 
@@ -94,7 +147,7 @@ Assuming there is some other process to create the user.
 
 ### Drupal Cypress login as a specific user
 Uses a Drush one time login links to login as a specific user.
-```   
+```
 cy.loginOneTimeLink('myusername');
 ```
 
