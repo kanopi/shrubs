@@ -24,6 +24,13 @@ Cypress.Commands.add('drush', (command, options = {}) => {
     exec_command = 'ssh -T ' + Cypress.env('DRUSH_IS_PANTHEON') + '@appserver.' + Cypress.env('DRUSH_IS_PANTHEON') + '.drush.in -p 2222 -o "StrictHostKeyChecking=no" -o "AddressFamily inet" "drush --uri=' + Cypress.config('baseUrl') +  ' ' + command + '"';
   }
 
+  // Tugboat integration - requires DRUSH_IS_TUGBOAT(boolean), TUGBOAT_INSTANCE_ID and TUGBOAT_TOKEN
+  if(Cypress.env('DRUSH_IS_TUGBOAT')) {
+      const instanceId = Cypress.env('TUGBOAT_INSTANCE_ID');
+      const tugboatToken = Cypress.env('TUGBOAT_TOKEN');
+      exec_command = `tugboat -t ${tugboatToken} shell ${instanceId} command="drush ${command}"`;
+  }
+
   cy.exec(exec_command, options).then((result) => {
     cy.log(result.stdout);
     cy.wrap(result.stdout).as('drushOutput');
