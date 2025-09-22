@@ -75,7 +75,7 @@ cy.ckeditorType('#field_body-wrapper', 'hello world');
 
 ### Drupal Cypress drush
 Runs Drush commands in multiple environments.
-With the correct configuration it can taget the following:
+With the correct configuration it can target the following:
 * Docksal
 * Lando
 * DDEV
