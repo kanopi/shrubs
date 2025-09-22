@@ -123,9 +123,9 @@ In the format of `PANTHEON_SITE_ID.ENVIRONMENT_ID`
   "TUGBOAT_INSTANCE_ID" : "1234567890"
 }
 ```
-##### Tugboat
+##### Tugboat CLI
 
-The Tugboat CLI needs a little extra help being installed in AMD64 architecture.
+The Tugboat CLI needs a little extra help being installed in AMD64 architecture. For example if you are install the CLI within a CI/CD system like CircleCI or GitHub Actions.
 
 ```bash
 sudo dpkg --add-architecture amd64
